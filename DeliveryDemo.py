@@ -18,12 +18,13 @@ def initMainMenu(frame, canvas):
 
     #column 1
     Button(frame, text="Options", height = 1, width=20).grid(row=0, column=1, padx=2, pady=2)
-    Button(frame, text="Go to global veiw", height = 1, width=20).grid(row=1, column=1, padx=2, pady=2)
+    Button(frame, text="Go to global view", height = 1, width=20).grid(row=1, column=1, padx=2, pady=2)
     Button(frame, text="Clear window", command= lambda: clearWindow(canvas), height = 1, width=20).grid(row=2, column=1, padx=2, pady=2)
 
 #same as main menu initializes the submenu
 def initSubMenu(frame):
     Label(frame, text="currently selected:", bg="gray").pack()
+    Button(frame, text="Add node", command= lambda: addNode(draw,-10,-150, master), height = 1, width=20).pack(padx=2, pady=2)    
     Button(frame, text="Remove node", height = 1, width=20).pack(padx=2, pady=2)
     Button(frame, text="View internals", height = 1, width=20).pack(padx=2, pady=2)
     Button(frame, text="Make known", height = 1, width=20).pack(padx=2, pady=2)
@@ -31,6 +32,15 @@ def initSubMenu(frame):
 def clearWindow(canvas):
     canvas.delete("all")
 
+# adding a node
+def addNode(w,x,y,master):
+        #update the number of nodes
+        global number_of_nodes
+        number_of_nodes = number_of_nodes + 1
+        #creating node x
+        b = Button(master, text = "G"+str(number_of_nodes), bg = "cyan", command=lambda : module_call('G'+str(number_of_nodes),w, master))
+        b_view = w.create_window(110+x, 265+y, window=b)
+    
 # creating Tk window 
 master = Tk() 
 master.configure(background="gray")
